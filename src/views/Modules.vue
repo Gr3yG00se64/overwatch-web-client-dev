@@ -13,6 +13,7 @@
             :author="mod.author"
             :enabled="mod.enabled"
             :id="mod.id"
+            :url="mod.url"
           />
         </div>
       </div>

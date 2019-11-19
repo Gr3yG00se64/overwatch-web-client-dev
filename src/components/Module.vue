@@ -5,7 +5,7 @@
     <hr class="my-4" />
     <p>Created By: {{ author }}</p>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">Explore</a>
+      <a class="btn btn-primary btn-lg" :href="url" role="button">Explore</a>
     </p>
 
     <div class="form-group">
@@ -15,7 +15,7 @@
           type="checkbox"
           class="custom-control-input"
           :id="compID"
-          :checked="toggleSwitch"
+          :checked="toggle"
         />
         <label class="custom-control-label" :for="compID">Disable/Enable</label>
       </div>
@@ -28,7 +28,7 @@ const API_URL = "http://localhost:5670/mod-data";
 
 export default {
   name: "Module",
-  props: ["name", "description", "author", "enabled", "id"],
+  props: ["name", "description", "author", "enabled", "id", "url"],
   data: function() {
     return {
       compID: null,
@@ -36,11 +36,8 @@ export default {
     };
   },
   methods: {
-    toggleSwitch() {
-      this.toggle = !this.toggle;
-      return this.toggle;
-    },
     toggleEnabled() {
+      this.toggle = !this.toggle;
       var send = {
         id: this.id
       };

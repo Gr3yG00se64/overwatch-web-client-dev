@@ -20,12 +20,6 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: "/modules",
-    name: "modules",
-    component: () =>
-      import(/* webpackChunkName: "modules" */ "../views/Modules.vue")
-  },
-  {
     path: "/documentation",
     name: "documentation",
     component: () =>
@@ -38,6 +32,36 @@ const routes = [
     name: "settings",
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/Settings.vue")
+  },
+  {
+    path: "/modules",
+    name: "modules",
+    component: () =>
+      import(
+        /*'modules', require(*/ "../views/Modules.vue"
+      ) /*,
+    children: [
+    {
+      path: "/modules/logger",
+      name: "logger",
+      component: () =>
+        import(/* webpackChunkName: "logger"  "../views/Logger.vue")
+    },
+    {
+      path: "/ids",
+      name: "ids",
+      component: () =>
+        import(/* webpackChunkName: "ids"  "../views/IDS.vue")
+    }
+    ]
+      //() =>
+      //import(/* webpackChunkName: "modules"  "../views/Modules.vue") */
+  },
+  {
+    path: "/logger",
+    name: "logger",
+    component: () =>
+      import(/* webpackChunkName: "logger" */ "../views/Logger.vue")
   }
 ];
 
