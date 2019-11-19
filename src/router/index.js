@@ -37,35 +37,23 @@ const routes = [
     path: "/modules",
     name: "modules",
     component: () =>
-      import(
-        /*'modules', require(*/ "../views/Modules.vue"
-      ) /*,
-    children: [
-    {
-      path: "/modules/logger",
-      name: "logger",
-      component: () =>
-        import(/* webpackChunkName: "logger"  "../views/Logger.vue")
-    },
-    {
-      path: "/ids",
-      name: "ids",
-      component: () =>
-        import(/* webpackChunkName: "ids"  "../views/IDS.vue")
-    }
-    ]
-      //() =>
-      //import(/* webpackChunkName: "modules"  "../views/Modules.vue") */
+      import(/* webpackChunkName: "modules" */ "../views/Modules.vue")
   },
   {
-    path: "/logger",
+    path: "/modules/logger",
     name: "logger",
     component: () =>
       import(/* webpackChunkName: "logger" */ "../views/Logger.vue")
+  },
+  {
+    path: "/modules/ids",
+    name: "ids",
+    component: () => import(/* webpackChunkName: "ids" */ "../views/IDS.vue")
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 
