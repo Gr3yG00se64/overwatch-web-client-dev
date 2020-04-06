@@ -24,7 +24,7 @@
 <script>
 import Module from "@/components/Module.vue";
 
-const API_URL = "http://localhost:5670/mod-data";
+const API_URL = "api/modules";
 
 export default {
   name: "modules",

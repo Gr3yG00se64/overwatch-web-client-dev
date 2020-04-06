@@ -19,7 +19,7 @@
 <script>
 import axios from "axios";
 
-const API_URL = "http://localhost:5670/get-logs";
+const API_URL = "api/logs";
 
 export default {
   name: "logger",
