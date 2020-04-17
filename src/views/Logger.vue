@@ -20,7 +20,7 @@
 import axios from "axios";
 
 //For Dev, API_URL needs to be ../api/logs
-const API_URL = "api/logs";
+const API_URL = "../api/logs";
 
 export default {
   name: "logger",
