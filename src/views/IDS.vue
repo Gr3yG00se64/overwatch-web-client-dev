@@ -73,8 +73,8 @@
 
 <script>
 import AlertInfo from "@/components/AlertInfo.vue";
-const API_URL_ALERTS = "api/alerts";
-const API_URL_DEVICES = "api/devices";
+const API_URL_ALERTS = "../api/alerts";
+const API_URL_DEVICES = "../api/devices";
 
 export default {
   name: "ids",

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-const API_URL = "api/pihole";
+const API_URL = "../api/pihole";
 
 export default {
   name: "logger",
