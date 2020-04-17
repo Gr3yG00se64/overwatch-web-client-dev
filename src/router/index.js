@@ -49,6 +49,11 @@ const routes = [
     path: "/modules/ids",
     name: "ids",
     component: () => import(/* webpackChunkName: "ids" */ "../views/IDS.vue")
+  },
+  {
+    path: "/modules/pihole",
+    name: "pihole",
+    component: () => import(/* webpackChunkName: "ids" */ "../views/Pihole.vue")
   }
 ];
 
