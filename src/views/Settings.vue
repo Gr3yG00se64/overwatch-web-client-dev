@@ -69,7 +69,7 @@
             >
           </div>
         </fieldset>
-        <button @click="submitWifi" type="submit" class="btn btn-primary">
+        <button @click="submitWifi()" type="submit" class="btn btn-primary">
           Submit
         </button>
       </form>
@@ -111,7 +111,7 @@ export default {
       });
   },
   methods: {
-    submitWifi() {
+    submitWifi(e) {
       var send = {
         ssid: this.wifi_ssid,
         password: this.wifi_password
@@ -124,6 +124,8 @@ export default {
           "content-type": "application/json"
         }
       });
+
+      e.preventDefault();
     },
     submitSafebrowsingAPI() {
       var send = {

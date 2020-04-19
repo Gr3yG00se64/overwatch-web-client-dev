@@ -15,11 +15,11 @@ export default {
   props: ["modID", "description", "severity", "alertInfo", "threatType"],
   methods: {
     changeBackground() {
-      if (this.severity == "Low") {
+      if (this.severity == "LOW") {
         return { backgroundColor: "#FFFF00" };
-      } else if (this.severity == "Medium") {
+      } else if (this.severity == "MEDIUM") {
         return { backgroundColor: "#FF8C00" };
-      } else if (this.severity == "High") {
+      } else if (this.severity == "HIGH") {
         return { backgroundColor: "#FF0000" };
       }
     }
