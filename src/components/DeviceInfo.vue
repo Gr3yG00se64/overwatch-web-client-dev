@@ -1,7 +1,15 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Device IP: {{ ip }}</h4>
+      <button
+        type="button"
+        class="ml-2 mb-1 close"
+        data-dismiss="toast"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h5 class="card-title">Device IP: {{ ip }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">
         Device Type: {{ deviceType }}
       </h6>
