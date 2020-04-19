@@ -34,6 +34,8 @@
         >
           Submit
         </button>
+        <br />
+        <br />
         <fieldset>
           <legend>Wifi Settings</legend>
           <div class="form-group">
@@ -60,7 +62,7 @@
               class="form-control"
               id="WifiPasswordInput"
               aria-describedby="Wifi Password"
-              placeholder="Please enter your WiFi Password"
+              placeholder="Please enter your WiFi password"
               style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
             />
             <small id="deviceTypeHelp" class="form-text text-muted"
@@ -72,6 +74,46 @@
         <button @click="submitWifi()" type="submit" class="btn btn-primary">
           Submit
         </button>
+        <br />
+        <br />
+        <fieldset>
+          <legend>Login Settings</legend>
+          <div class="form-group">
+            <label for="Auth Username">Username</label>
+            <input
+              v-model="user"
+              type="text"
+              class="form-control"
+              id="AuthUsername"
+              aria-describedby="Auth Username"
+              placeholder="Please enter your new login username"
+              style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
+            />
+            <small id="WifiSSIDHelp" class="form-text text-muted"
+              >This is the username you will use to access the Web
+              Portal.</small
+            >
+          </div>
+          <div class="form-group">
+            <label for="Auth Password">Password</label>
+            <input
+              v-model="user_password"
+              type="password"
+              class="form-control"
+              id="AuthPassword"
+              aria-describedby="Auth Password"
+              placeholder="Please enter your new login password"
+              style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
+            />
+            <small id="AuthPassword" class="form-text text-muted"
+              >This is the password you will use to access the Web
+              Portal.</small
+            >
+          </div>
+        </fieldset>
+        <button @click="submitAuth()" type="submit" class="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   </div>
@@ -80,6 +122,7 @@
 <script>
 const API_APIKEY_URL = "api/settings/apikeys";
 const API_WIFI_URL = "api/settings/wifi";
+const API_USER_URL = "api/settings/adduser";
 
 export default {
   name: "home",
@@ -87,7 +130,9 @@ export default {
     return {
       safebrowsing_api_key: "",
       wifi_ssid: "",
-      wifi_password: ""
+      wifi_password: "",
+      user: "",
+      user_password: ""
     };
   },
   mounted() {
@@ -107,11 +152,10 @@ export default {
       .then(response => response.json())
       .then(result => {
         this.wifi_ssid = result.ssid;
-        this.wifi_password = result.password;
       });
   },
   methods: {
-    submitWifi(e) {
+    submitWifi() {
       var send = {
         ssid: this.wifi_ssid,
         password: this.wifi_password
@@ -124,8 +168,6 @@ export default {
           "content-type": "application/json"
         }
       });
-
-      e.preventDefault();
     },
     submitSafebrowsingAPI() {
       var send = {
@@ -134,6 +176,20 @@ export default {
       };
 
       fetch(API_APIKEY_URL, {
+        method: "POST",
+        body: JSON.stringify(send),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+    },
+    submitAuth() {
+      var send = {
+        username: this.user,
+        password: this.user_password
+      };
+
+      fetch(API_USER_URL, {
         method: "POST",
         body: JSON.stringify(send),
         headers: {
