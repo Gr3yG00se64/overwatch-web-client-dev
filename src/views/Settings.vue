@@ -65,10 +65,16 @@
               placeholder="Please enter your WiFi password"
               style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
             />
-            <small id="deviceTypeHelp" class="form-text text-muted"
-              >For help acquiring this, please reference:
-              https://www.howtogeek.com/233159/how-to-find-your-wi-fi-password/</small
-            >
+            <br />
+            <input
+              v-model="wifi_password_validation"
+              type="password"
+              class="form-control"
+              id="WifiPasswordInputVal"
+              aria-describedby="Wifi Password Validation"
+              placeholder="Please re-enter your WiFi password"
+              style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
+            />
           </div>
         </fieldset>
         <button @click="submitWifi()" type="submit" class="btn btn-primary">
@@ -109,6 +115,20 @@
               >This is the password you will use to access the Web
               Portal.</small
             >
+            <br />
+            <input
+              v-model="user_password_validation"
+              type="password"
+              class="form-control"
+              id="AuthPasswordVal"
+              aria-describedby="Auth Password"
+              placeholder="Please re-enter your new login password"
+              style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
+            />
+            <small id="AuthPassword" class="form-text text-muted"
+              >This is the password you will use to access the Web
+              Portal.</small
+            >
           </div>
         </fieldset>
         <button @click="submitAuth()" type="submit" class="btn btn-primary">
@@ -131,8 +151,10 @@ export default {
       safebrowsing_api_key: "",
       wifi_ssid: "",
       wifi_password: "",
+      wifi_password_validation: "",
       user: "",
-      user_password: ""
+      user_password: "",
+      user_password_validation: ""
     };
   },
   mounted() {
@@ -156,18 +178,20 @@ export default {
   },
   methods: {
     submitWifi() {
-      var send = {
-        ssid: this.wifi_ssid,
-        password: this.wifi_password
-      };
+      if (this.wifi_password === this.wifi_password_validation) {
+        var send = {
+          ssid: this.wifi_ssid,
+          password: this.wifi_password
+        };
 
-      fetch(API_WIFI_URL, {
-        method: "POST",
-        body: JSON.stringify(send),
-        headers: {
-          "content-type": "application/json"
-        }
-      });
+        fetch(API_WIFI_URL, {
+          method: "POST",
+          body: JSON.stringify(send),
+          headers: {
+            "content-type": "application/json"
+          }
+        });
+      }
     },
     submitSafebrowsingAPI() {
       var send = {
@@ -184,18 +208,20 @@ export default {
       });
     },
     submitAuth() {
-      var send = {
-        username: this.user,
-        password: this.user_password
-      };
+      if (this.user_password === this.user_password_validation) {
+        var send = {
+          username: this.user,
+          password: this.user_password
+        };
 
-      fetch(API_USER_URL, {
-        method: "POST",
-        body: JSON.stringify(send),
-        headers: {
-          "content-type": "application/json"
-        }
-      });
+        fetch(API_USER_URL, {
+          method: "POST",
+          body: JSON.stringify(send),
+          headers: {
+            "content-type": "application/json"
+          }
+        });
+      }
     }
   }
 };
