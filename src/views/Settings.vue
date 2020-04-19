@@ -77,7 +77,7 @@
             />
           </div>
         </fieldset>
-        <button @click="submitWifi()" type="submit" class="btn btn-primary">
+        <button @click="submitWifi" type="submit" class="btn btn-primary">
           Submit
         </button>
         <br />
@@ -131,11 +131,34 @@
             >
           </div>
         </fieldset>
-        <button @click="submitAuth()" type="submit" class="btn btn-primary">
+        <button @click="submitAuth" type="submit" class="btn btn-primary">
           Submit
         </button>
       </form>
+
+      <br />
+      <br />
+
+      <h2>Reset Options</h2>
+      <br />
+
+      <h4>Click the button below to delete all registered devices</h4>
+      <br />
+      <button @click="clearDevices" type="submit" class="btn btn-danger">
+        Delete Devices
+      </button>
+
+      <br />
+      <br />
+
+      <h4>Click the button below to delete all Alerts</h4>
+      <br />
+      <button @click="clearAlerts" type="submit" class="btn btn-danger">
+        Delete Alerts
+      </button>
     </div>
+    <br />
+    <br />
   </div>
 </template>
 
@@ -143,6 +166,8 @@
 const API_APIKEY_URL = "api/settings/apikeys";
 const API_WIFI_URL = "api/settings/wifi";
 const API_USER_URL = "api/settings/adduser";
+const API_CLEAR_ALERTS = "api/alerts/clear";
+const API_CLEAR_DEVICES = "api/devices/clear";
 
 export default {
   name: "home",
@@ -222,6 +247,24 @@ export default {
           }
         });
       }
+    },
+    clearDevices() {
+      fetch(API_CLEAR_DEVICES, {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+    },
+    clearAlerts() {
+      fetch(API_CLEAR_ALERTS, {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
     }
   }
 };

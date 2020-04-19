@@ -1,7 +1,8 @@
 <template>
-  <div class="card">
+  <div class="card" v-if="show">
     <div class="card-body">
       <button
+        @click="deleteDevice"
         type="button"
         class="ml-2 mb-1 close"
         data-dismiss="toast"
@@ -19,8 +20,33 @@
 </template>
 
 <script>
+const API_URL_DELETE_DEVICE = "api/devices/delete";
+
 export default {
-  name: "AlertInfo",
-  props: ["deviceType", "description", "ip"]
+  name: "DeviceInfo",
+  props: ["deviceType", "description", "ip", "mongoID"],
+  data: function() {
+    return {
+      //Store Modules in database?
+      show: true
+    };
+  },
+  methods: {
+    deleteDevice() {
+      var send = {
+        id: this.mongoID
+      };
+
+      fetch(API_URL_DELETE_DEVICE, {
+        method: "POST",
+        body: JSON.stringify(send),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      this.show = !this.show;
+    }
+  }
 };
 </script>

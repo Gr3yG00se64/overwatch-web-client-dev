@@ -1,8 +1,13 @@
 <template>
-  <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+  <div
+    v-if="show"
+    class="card text-white bg-danger mb-3"
+    style="max-width: 20rem;"
+  >
     <div class="card-header">
       {{ description }}
       <button
+        @click="deleteAlert"
         type="button"
         class="ml-2 mb-1 close"
         data-dismiss="toast"
@@ -21,9 +26,24 @@
 </template>
 
 <script>
+const API_URL_DELETE_ALERT = "../api/alerts/delete";
+
 export default {
   name: "AlertInfo",
-  props: ["modID", "description", "severity", "alertInfo", "threatType"],
+  props: [
+    "modID",
+    "description",
+    "severity",
+    "alertInfo",
+    "threatType",
+    "mongoID"
+  ],
+  data: function() {
+    return {
+      //Store Modules in database?
+      show: true
+    };
+  },
   methods: {
     changeBackground() {
       if (this.severity == "LOW") {
@@ -33,6 +53,21 @@ export default {
       } else if (this.severity == "HIGH") {
         return { backgroundColor: "#FF0000" };
       }
+    },
+    deleteAlert() {
+      var send = {
+        id: this.mongoID
+      };
+
+      fetch(API_URL_DELETE_ALERT, {
+        method: "POST",
+        body: JSON.stringify(send),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      this.show = !this.show;
     }
   }
 };

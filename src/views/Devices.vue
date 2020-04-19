@@ -79,6 +79,7 @@
             :deviceType="device.deviceType"
             :description="device.description"
             :ip="device.ip"
+            :mongoID="device._id"
           />
         </div>
       </div>

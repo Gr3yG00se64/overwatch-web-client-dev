@@ -18,6 +18,7 @@
             :severity="alert.severity"
             :alertInfo="alert.alertInfo"
             :threatType="alert.threatType"
+            :mongoID="alert._id"
           />
         </div>
       </div>
