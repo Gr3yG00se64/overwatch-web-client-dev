@@ -20,6 +20,18 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
+    path: "/modules",
+    name: "modules",
+    component: () =>
+      import(/* webpackChunkName: "modules" */ "../views/Modules.vue")
+  },
+  {
+    path: "/devices",
+    name: "devices",
+    component: () =>
+      import(/* webpackChunkName: "modules" */ "../views/Devices.vue")
+  },
+  {
     path: "/documentation",
     name: "documentation",
     component: () =>
@@ -32,12 +44,6 @@ const routes = [
     name: "settings",
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/Settings.vue")
-  },
-  {
-    path: "/modules",
-    name: "modules",
-    component: () =>
-      import(/* webpackChunkName: "modules" */ "../views/Modules.vue")
   },
   {
     path: "/modules/logger",

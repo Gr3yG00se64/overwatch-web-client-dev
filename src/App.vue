@@ -12,6 +12,9 @@
             <a class="nav-link" href="/Modules">Modules</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/Devices">Devices</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/Documentation">Documentation</a>
           </li>
           <li class="nav-item">
