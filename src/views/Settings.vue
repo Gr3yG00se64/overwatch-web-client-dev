@@ -332,7 +332,7 @@ export default {
   data: function() {
     return {
       //Data Variables
-      safebrowsing_api_key: "_",
+      safebrowsing_api_key: " ",
       wifi_ssid: "",
       wifi_password: "",
       wifi_password_validation: "",
@@ -400,6 +400,7 @@ export default {
       }
     },
     submitSafebrowsingAPI() {
+      this.api_show = false;
       var send = {
         name: "googlesafebrowsing",
         key: this.safebrowsing_api_key
@@ -437,6 +438,8 @@ export default {
       }
     },
     clearDevices() {
+      this.clear_devices_show = false;
+
       fetch(API_CLEAR_DEVICES, {
         method: "POST",
         body: JSON.stringify({}),
@@ -448,6 +451,8 @@ export default {
       this.clear_devices_show = true;
     },
     clearAlerts() {
+      this.clear_alerts_show = false;
+
       fetch(API_CLEAR_ALERTS, {
         method: "POST",
         body: JSON.stringify({}),
@@ -458,6 +463,8 @@ export default {
       this.clear_alerts_show = true;
     },
     submitExpiry() {
+      this.expiry_show = false;
+
       var send = {
         alert: this.alert_expiry
       };
