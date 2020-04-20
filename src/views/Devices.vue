@@ -59,6 +59,20 @@
         <button @click="submitDevice" type="submit" class="btn btn-primary">
           Submit
         </button>
+        <div v-show="device_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-success">
+            <button
+              @click="closeDeviceShow"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>Device Submitted Successfully!</strong>
+          </div>
+        </div>
       </form>
     </div>
 
@@ -81,6 +95,7 @@
             :ip="device.ip"
             :mongoID="device._id"
           />
+          <br />
         </div>
       </div>
     </div>
@@ -99,7 +114,8 @@ export default {
       deviceType: "",
       description: "",
       ip: "",
-      deviceList: []
+      deviceList: [],
+      device_show: false
     };
   },
   mounted() {
@@ -131,6 +147,8 @@ export default {
   },
   methods: {
     submitDevice() {
+      this.device_show = false;
+
       var send = {
         deviceType: this.deviceType,
         description: this.description,
@@ -145,12 +163,16 @@ export default {
         }
       });
 
+      this.device_show = true;
       this.deviceType = "";
       this.description = "";
       this.ip = "";
     },
     toggleForm() {
       this.formToggle = !this.formToggle;
+    },
+    closeDeviceShow() {
+      this.device_show = false;
     }
   },
   components: {

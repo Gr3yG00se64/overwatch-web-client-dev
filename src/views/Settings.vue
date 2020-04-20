@@ -7,7 +7,7 @@
     </div>
 
     <div class="container center-div">
-      <form>
+      <form onsubmit="return false">
         <fieldset>
           <legend>API Keys</legend>
           <div class="form-group">
@@ -27,6 +27,7 @@
             >
           </div>
         </fieldset>
+
         <button
           @click="submitSafebrowsingAPI"
           type="submit"
@@ -34,6 +35,31 @@
         >
           Submit
         </button>
+
+        <div v-show="api_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-success">
+            <button
+              @click="closeShowAPI"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>API Keys Submitted Successfully!</strong>
+          </div>
+        </div>
+
+        <div v-show="noAPIAlertShow" style="max-width: 50%">
+          <br />
+          <div class="alert alert-dismissible alert-danger">
+            <strong
+              >The IDS Module will not function without this API Key</strong
+            >
+          </div>
+        </div>
+
         <br />
         <br />
         <fieldset>
@@ -80,6 +106,37 @@
         <button @click="submitWifi" type="submit" class="btn btn-primary">
           Submit
         </button>
+
+        <div v-show="wifi_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-success">
+            <button
+              @click="closeShowWifi"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>WiFi SSID And Password Submitted Successfully!</strong>
+          </div>
+        </div>
+
+        <div v-show="wifi_fail_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-danger">
+            <button
+              @click="closeShowWifiFail"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>Wifi Passwords Don't Match! Try Again!</strong>
+          </div>
+        </div>
+
         <br />
         <br />
         <fieldset>
@@ -134,6 +191,36 @@
         <button @click="submitAuth" type="submit" class="btn btn-primary">
           Submit
         </button>
+
+        <div v-show="auth_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-success">
+            <button
+              @click="closeShowAuth"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>Login Username And Password Submitted Successfully!</strong>
+          </div>
+        </div>
+
+        <div v-show="auth_fail_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-danger">
+            <button
+              @click="closeShowAuthFail"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>Login Passwords Don't Match! Try Again!</strong>
+          </div>
+        </div>
       </form>
 
       <br />
@@ -148,6 +235,21 @@
         Delete Devices
       </button>
 
+      <div v-show="clear_devices_show" style="max-width: 30%">
+        <br />
+        <div class="alert alert-dismissible alert-success">
+          <button
+            @click="closeShowClearDevices"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+          >
+            &times;
+          </button>
+          <strong>Registered Devices Deleted Successfully!</strong>
+        </div>
+      </div>
+
       <br />
       <br />
 
@@ -156,6 +258,20 @@
       <button @click="clearAlerts" type="submit" class="btn btn-danger">
         Delete Alerts
       </button>
+      <div v-show="clear_alerts_show" style="max-width: 30%">
+        <br />
+        <div class="alert alert-dismissible alert-success">
+          <button
+            @click="closeShowClearAlerts"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+          >
+            &times;
+          </button>
+          <strong>Alerts Deleted Successfully!</strong>
+        </div>
+      </div>
     </div>
     <br />
     <br />
@@ -179,7 +295,14 @@ export default {
       wifi_password_validation: "",
       user: "",
       user_password: "",
-      user_password_validation: ""
+      user_password_validation: "",
+      api_show: false,
+      wifi_show: false,
+      auth_show: false,
+      clear_devices_show: false,
+      clear_alerts_show: false,
+      wifi_fail_show: false,
+      auth_fail_show: false
     };
   },
   mounted() {
@@ -216,6 +339,11 @@ export default {
             "content-type": "application/json"
           }
         });
+        this.wifi_fail_show = false;
+        this.wifi_show = true;
+      } else {
+        this.wifi_show = false;
+        this.wifi_fail_show = true;
       }
     },
     submitSafebrowsingAPI() {
@@ -231,6 +359,8 @@ export default {
           "content-type": "application/json"
         }
       });
+
+      this.api_show = true;
     },
     submitAuth() {
       if (this.user_password === this.user_password_validation) {
@@ -246,6 +376,11 @@ export default {
             "content-type": "application/json"
           }
         });
+        this.auth_fail_show = false;
+        this.auth_show = true;
+      } else {
+        this.auth_show = false;
+        this.auth_fail_show = true;
       }
     },
     clearDevices() {
@@ -256,6 +391,8 @@ export default {
           "content-type": "application/json"
         }
       });
+
+      this.clear_devices_show = true;
     },
     clearAlerts() {
       fetch(API_CLEAR_ALERTS, {
@@ -265,6 +402,38 @@ export default {
           "content-type": "application/json"
         }
       });
+      this.clear_alerts_show = true;
+    },
+    //Beginning of all alert show methods
+    closeShowAPI() {
+      this.api_show = false;
+    },
+    closeShowWifi() {
+      this.wifi_show = false;
+    },
+    closeShowAuth() {
+      this.auth_show = false;
+    },
+    closeShowClearAlerts() {
+      this.clear_alerts_show = false;
+    },
+    closeShowClearDevices() {
+      this.clear_devices_show = false;
+    },
+    closeShowWifiFail() {
+      this.wifi_fail_show = false;
+    },
+    closeShowAuthFail() {
+      this.auth_fail_show = false;
+    }
+  },
+  computed: {
+    noAPIAlertShow() {
+      if (this.safebrowsing_api_key === "") {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
