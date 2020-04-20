@@ -87,7 +87,7 @@
     <br />
 
     <div class="container">
-      <div v-for="(group, index) in groupAlerts" :key="index" class="row">
+      <div v-for="(group, index) in groupRegDevices" :key="index" class="row">
         <div v-for="device in group" :key="device._id" class="col">
           <DeviceInfo
             :deviceType="device.deviceType"
@@ -99,12 +99,53 @@
         </div>
       </div>
     </div>
+
+    <br />
+    <br />
+
+    <h1 class="text-center">Unregistered Devices</h1>
+
+    <br />
+    <br />
+
+    <div class="text-center">
+      <div class="my-3">
+        <button @click="toggleUnreg" type="submit" class="btn btn-primary">
+          Toggle Devices
+        </button>
+        <br />
+        <small>Press the button to toggle unregistered devices</small>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div v-if="unregToggle" class="container">
+      <div
+        v-for="(group2, index2) in groupUnregDevices"
+        :key="index2"
+        class="row"
+      >
+        <div v-for="unreg in group2" :key="unreg._id" class="col">
+          <UnregDeviceInfo :ip="unreg.ip" />
+          <br />
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
 <script>
 const API_URL_DEVICES = "api/devices";
+const API_URL_UNREG_DEVICES = "api/devices/unregistered";
+
 import DeviceInfo from "@/components/DeviceInfo.vue";
+import UnregDeviceInfo from "@/components/UnregDeviceInfo.vue";
 
 export default {
   name: "devices",
@@ -115,7 +156,9 @@ export default {
       description: "",
       ip: "",
       deviceList: [],
-      device_show: false
+      device_show: false,
+      unregToggle: false,
+      unregDeviceList: []
     };
   },
   mounted() {
@@ -124,15 +167,39 @@ export default {
       .then(result => {
         this.deviceList = result;
       });
+
+    fetch(API_URL_UNREG_DEVICES)
+      .then(response => response.json())
+      .then(result => {
+        this.unregDeviceList = result.devices;
+      });
   },
   computed: {
-    groupAlerts() {
+    groupRegDevices() {
       let index = 0;
       let arrayLength = this.deviceList.length;
       let tempArray = [];
       let myChunk = null;
       let chunk_size = 3;
       let array = [...this.deviceList];
+
+      if (arrayLength > 0) {
+        for (index = 0; index < arrayLength; index += chunk_size) {
+          myChunk = array.slice(index, index + chunk_size);
+          tempArray.push(myChunk);
+        }
+
+        return tempArray;
+      }
+      return [];
+    },
+    groupUnregDevices() {
+      let index = 0;
+      let arrayLength = this.unregDeviceList.length;
+      let tempArray = [];
+      let myChunk = null;
+      let chunk_size = 3;
+      let array = [...this.unregDeviceList];
 
       if (arrayLength > 0) {
         for (index = 0; index < arrayLength; index += chunk_size) {
@@ -173,10 +240,14 @@ export default {
     },
     closeDeviceShow() {
       this.device_show = false;
+    },
+    toggleUnreg() {
+      this.unregToggle = !this.unregToggle;
     }
   },
   components: {
-    DeviceInfo
+    DeviceInfo,
+    UnregDeviceInfo
   }
 };
 </script>

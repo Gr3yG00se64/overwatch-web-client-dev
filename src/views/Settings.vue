@@ -221,6 +221,47 @@
             <strong>Login Passwords Don't Match! Try Again!</strong>
           </div>
         </div>
+
+        <br />
+        <br />
+
+        <fieldset>
+          <legend>Expiry Settings</legend>
+          <div class="form-group">
+            <label for="RegisteredDevicyExpiry">Alert Expiry Time</label>
+            <input
+              v-model="alert_expiry"
+              type="text"
+              class="form-control"
+              id="AlertExpiryForm"
+              aria-describedby="Alert Expiry"
+              placeholder="Please enter the number of days you would like to store alerts"
+              style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;'
+            />
+            <small id="AlertExpiryHelp" class="form-text text-muted"
+              >This is the amount of days an alert will stay stored until
+              expiring. Numbers less than 1 store them indefinitely.</small
+            >
+          </div>
+        </fieldset>
+        <button @click="submitExpiry" type="submit" class="btn btn-primary">
+          Submit
+        </button>
+
+        <div v-show="expiry_show" style="max-width: 30%">
+          <br />
+          <div class="alert alert-dismissible alert-success">
+            <button
+              @click="closeShowExpiry"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+            >
+              &times;
+            </button>
+            <strong>Expiry Settings Submitted Successfully!</strong>
+          </div>
+        </div>
       </form>
 
       <br />
@@ -284,25 +325,31 @@ const API_WIFI_URL = "api/settings/wifi";
 const API_USER_URL = "api/settings/adduser";
 const API_CLEAR_ALERTS = "api/alerts/clear";
 const API_CLEAR_DEVICES = "api/devices/clear";
+const API_EXPIRY_URL = "api/settings/expiry";
 
 export default {
   name: "home",
   data: function() {
     return {
-      safebrowsing_api_key: "",
+      //Data Variables
+      safebrowsing_api_key: "_",
       wifi_ssid: "",
       wifi_password: "",
       wifi_password_validation: "",
       user: "",
       user_password: "",
       user_password_validation: "",
+      alert_expiry: "",
+
+      //Alert Show Variables
       api_show: false,
       wifi_show: false,
       auth_show: false,
       clear_devices_show: false,
       clear_alerts_show: false,
       wifi_fail_show: false,
-      auth_fail_show: false
+      auth_fail_show: false,
+      expiry_show: false
     };
   },
   mounted() {
@@ -322,6 +369,12 @@ export default {
       .then(response => response.json())
       .then(result => {
         this.wifi_ssid = result.ssid;
+      });
+
+    fetch(API_EXPIRY_URL)
+      .then(response => response.json())
+      .then(result => {
+        this.alert_expiry = result.alert;
       });
   },
   methods: {
@@ -404,6 +457,21 @@ export default {
       });
       this.clear_alerts_show = true;
     },
+    submitExpiry() {
+      var send = {
+        alert: this.alert_expiry
+      };
+
+      fetch(API_EXPIRY_URL, {
+        method: "POST",
+        body: JSON.stringify(send),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      this.expiry_show = true;
+    },
     //Beginning of all alert show methods
     closeShowAPI() {
       this.api_show = false;
@@ -425,6 +493,9 @@ export default {
     },
     closeShowAuthFail() {
       this.auth_fail_show = false;
+    },
+    closeShowExpiry() {
+      this.expiry_show = false;
     }
   },
   computed: {

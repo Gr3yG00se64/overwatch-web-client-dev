@@ -7,7 +7,26 @@
       forms of protection.
     </p>
 
-    <h2 class="my-5">Alerts</h2>
+    <h1 class="my-5">Alerts</h1>
+
+    <h4>Sort Alert Options</h4>
+    <div style="display: in-line-block">
+      <button
+        @click="sortLowToHigh"
+        type="button"
+        class="btn btn-warning"
+        style="margin-right: 30px"
+      >
+        Low->High
+      </button>
+      <button @click="sortHighToLow" type="button" class="btn btn-danger">
+        High->Low
+      </button>
+    </div>
+
+    <br />
+    <br />
+    <br />
 
     <div class="container">
       <div v-for="(group, index) in groupAlerts" :key="index" class="row">
@@ -18,6 +37,7 @@
             :severity="alert.severity"
             :alertInfo="alert.alertInfo"
             :threatType="alert.threatType"
+            :date="alert.date"
             :mongoID="alert._id"
           />
         </div>
@@ -65,6 +85,72 @@ export default {
         return tempArray;
       }
       return [];
+    }
+  },
+  methods: {
+    sortHighToLow() {
+      let tempArray = [];
+      let lowArray = [];
+      let medArray = [];
+      let highArray = [];
+
+      let index = 0;
+
+      for (index = 0; index < this.alertList.length; index += 1) {
+        if (this.alertList[index].severity == "LOW") {
+          lowArray.push(this.alertList[index]);
+        }
+        if (this.alertList[index].severity == "MEDIUM") {
+          medArray.push(this.alertList[index]);
+        }
+        if (this.alertList[index].severity == "HIGH") {
+          highArray.push(this.alertList[index]);
+        }
+      }
+
+      for (index = 0; index < highArray.length; index += 1) {
+        tempArray.push(highArray[index]);
+      }
+      for (index = 0; index < medArray.length; index += 1) {
+        tempArray.push(medArray[index]);
+      }
+      for (index = 0; index < lowArray.length; index += 1) {
+        tempArray.push(lowArray[index]);
+      }
+
+      this.alertList = [...tempArray];
+    },
+    sortLowToHigh() {
+      let tempArray = [];
+      let lowArray = [];
+      let medArray = [];
+      let highArray = [];
+
+      let index = 0;
+
+      for (index = 0; index < this.alertList.length; index += 1) {
+        if (this.alertList[index].severity == "LOW") {
+          lowArray.push(this.alertList[index]);
+        }
+        if (this.alertList[index].severity == "MEDIUM") {
+          medArray.push(this.alertList[index]);
+        }
+        if (this.alertList[index].severity == "HIGH") {
+          highArray.push(this.alertList[index]);
+        }
+      }
+
+      for (index = 0; index < lowArray.length; index += 1) {
+        tempArray.push(lowArray[index]);
+      }
+      for (index = 0; index < medArray.length; index += 1) {
+        tempArray.push(medArray[index]);
+      }
+      for (index = 0; index < highArray.length; index += 1) {
+        tempArray.push(highArray[index]);
+      }
+
+      this.alertList = [...tempArray];
     }
   },
   components: {
